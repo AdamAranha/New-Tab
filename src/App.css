@@ -1,29 +1,121 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@100&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@100&display=swap");
-.clock {
-  height: 20vh;
-  width: 60vw;
+.timedateweather .time {
+  margin: 0;
+  font-size: 13vw;
+  font-weight: 200;
+  line-height: 90%;
+  letter-spacing: 0.25rem;
+}
+.timedateweather .dateWeather {
+  display: flex;
+  justify-content: center;
+}
+.timedateweather .dateWeather .date {
+  margin: 0;
+  padding: 0 1vw;
   display: flex;
   align-items: center;
-  justify-content: center;
-  border: 1px dashed red;
+  justify-content: end;
+  border-right: 1px solid #828699;
+  font-size: 2.5vw;
 }
-.clock .time {
-  margin: 0;
-  font-size: 10vw;
-}
-
-.dateWeather {
-  height: 20vh;
-  width: 60vw;
-  border: 1px solid red;
+.timedateweather .dateWeather .weather-container {
   display: flex;
+  align-items: center;
+}
+.timedateweather .dateWeather .weather-container .weather-img {
+  height: 2.5vw;
+  padding: 0 1vw;
+}
+.timedateweather .dateWeather .weather-container .weather {
+  margin: 0;
+  font-size: 2.5vw;
 }
 
 .shortcuts {
-  height: 20vh;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
   width: 60vw;
-  border: 1px solid red;
+  margin-top: 15vw;
+  display: flex;
+  gap: 2vw;
+  justify-content: center;
+  align-items: center;
+}
+.shortcuts .shortcuts-add {
+  height: 8vw;
+  width: 8vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  transition: background-color 100ms ease-in-out;
+}
+.shortcuts .shortcuts-add:hover {
+  background-color: #191a25;
+  cursor: pointer;
+}
+.shortcuts .shortcuts-add::before {
+  content: url("./assets/cross.svg");
+  height: 3vw;
+  width: 3vw;
+}
+.shortcuts .shortcuts-existing {
+  height: 8vw;
+  width: 8vw;
+  position: relative;
+  border-radius: 5px;
+}
+.shortcuts .shortcuts-existing:hover {
+  background-color: #191a25;
+  cursor: pointer;
+}
+.shortcuts .shortcuts-existing:hover .shortcuts-edit::before {
+  opacity: 1;
+}
+.shortcuts .shortcuts-existing:hover::before {
+  text-shadow: 5px 5px 0px rgba(0, 0, 0, 0.5);
+}
+.shortcuts .shortcuts-existing:not(:hover) .shortcuts-edit {
+  transition-delay: 0s;
+}
+.shortcuts .shortcuts-existing:not(:hover) .shortcuts-edit::before {
+  transition-delay: 0s;
+}
+.shortcuts .shortcuts-existing::before {
+  content: attr(shortcut-letter);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 5vw;
+}
+.shortcuts .shortcuts-existing .shortcuts-edit {
+  height: 2vw;
+  width: 2vw;
+  position: absolute;
+  top: 0.25vw;
+  right: 0.25vw;
+  border-radius: 50%;
+}
+.shortcuts .shortcuts-existing .shortcuts-edit::before {
+  content: url("./assets/optionsDots.svg");
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  width: 0.3vw;
+  display: block;
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -45%);
+  opacity: 0;
+  transition: opacity 150ms ease-in-out 200ms;
+}
+.shortcuts .shortcuts-existing .shortcuts-edit:hover {
+  background-color: #2e3042;
 }
 
 *, *::before, *::after {

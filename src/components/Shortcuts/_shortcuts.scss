@@ -1,9 +1,86 @@
-@use '../variables';
+@use '../variables' as *;
+
+$shortcutSize:8vw;
 
 .shortcuts{
 
-    height: 20vh;
+    height: fit-content;
     width: 60vw;
+    margin-top: 15vw;
+    display: flex;
+    gap: 2vw;
+    justify-content: center;
+    align-items: center;
 
-    border: 1px solid red;
+    .shortcuts-add{
+        height: $shortcutSize;
+        width: $shortcutSize;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 50%;
+        transition: background-color 100ms ease-in-out;
+        &:hover{
+            background-color: #191a25;
+            cursor: pointer;
+        }
+        &::before{
+            content: url('./assets/cross.svg');
+            height: 3vw;
+            width: 3vw;
+        }
+    }
+
+    .shortcuts-existing{
+        height:$shortcutSize;
+        width:$shortcutSize;
+        position: relative;
+        border-radius:5px;
+        // background-color: red;
+        &:hover{
+            background-color: #191a25;
+            cursor: pointer;
+            .shortcuts-edit{ &::before{ opacity: 1; } }
+            &::before{ text-shadow: 5px 5px 0px rgba(0,0,0,0.5); }
+        }
+        &:not(:hover){
+            .shortcuts-edit{
+                transition-delay:0s;
+                &::before{transition-delay: 0s;}
+            }
+        }
+        &::before{
+            content:attr(shortcut-letter);
+            position:absolute;
+            top:50%;
+            left:50%;
+            transform: translate(-50%,-50%);
+            font-size: 5vw;
+        }
+        .shortcuts-edit{
+            height:2vw;
+            width:2vw;
+            position: absolute;
+            top:.25vw;
+            right:.25vw;
+            border-radius:50%;
+            
+            &::before{
+                content: url('./assets/optionsDots.svg');
+                height:fit-content;
+                width:.3vw;
+                display: block;
+                border-radius: 50%;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%,-45%);
+                opacity: 0;
+                transition: opacity 150ms ease-in-out 200ms;
+            }
+
+            &:hover{ background-color: #2e3042; }
+        }
+    }
 }

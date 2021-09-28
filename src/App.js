@@ -1,13 +1,11 @@
 import './App.css';
-import Clock from './components/Clock/Clock';
-import DateWeather from './components/DateWeather/DateWeather';
 import Shortcuts from './components/Shortcuts/Shortcuts';
+import TimeDateWeather from './components/TimeDateWeather/TimeDateWeather';
 
 function App() {
   return (
     <div className="App">
-      <Clock />
-      <DateWeather />
+      <TimeDateWeather />
       <Shortcuts />
     </div>
   );
