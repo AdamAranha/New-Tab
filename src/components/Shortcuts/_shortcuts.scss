@@ -21,6 +21,7 @@ $shortcutSize:8vw;
         align-items: center;
         border-radius: 50%;
         transition: background-color 100ms ease-in-out;
+
         &:hover{
             background-color: #191a25;
             cursor: pointer;
@@ -37,7 +38,8 @@ $shortcutSize:8vw;
         width:$shortcutSize;
         position: relative;
         border-radius:5px;
-        // background-color: red;
+        transition: background-color 100ms ease-in-out;
+
         &:hover{
             background-color: #191a25;
             cursor: pointer;

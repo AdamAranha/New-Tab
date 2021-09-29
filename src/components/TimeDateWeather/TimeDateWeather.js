@@ -72,7 +72,8 @@ export default function TimeDateWeather() {
                     setWeather(Math.floor(result));
                     window.localStorage.setItem('weatherValue', JSON.stringify(weatherValue));
                 });
-        }
+        } else { setWeather(Math.floor(storedValue.temp)) }
+
         async function someWeather() {
             const response = await fetch('https://api.openweathermap.org/data/2.5/weather?q=toronto&units=metric&appid=c017c4d551f1c62d18088f7e1024cd1f');
             const weather = await response.json();
@@ -82,9 +83,7 @@ export default function TimeDateWeather() {
 
     return (
         <section className='timedateweather'>
-            <p className='time'>
-                {time}
-            </p>
+            <p className='time'>{time}</p>
             <div className='dateWeather'>
                 <p className='date'>{date}</p>
                 <div className='weather-container'>
