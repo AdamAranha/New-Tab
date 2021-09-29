@@ -8,18 +8,22 @@ $shortcutSize:8vw;
     width: 60vw;
     margin-top: 15vw;
     display: flex;
-    gap: 2vw;
+    // gap: 2vw;
     justify-content: center;
     align-items: center;
+    color:$font-colour;
+    font-family: $font-family;
 
     .shortcuts-add{
         height: $shortcutSize;
         width: $shortcutSize;
+        margin:1vw;
 
         display: flex;
         justify-content: center;
         align-items: center;
         border-radius: 50%;
+        border: 1px solid #191a25;
         transition: background-color 100ms ease-in-out;
 
         &:hover{
@@ -36,7 +40,10 @@ $shortcutSize:8vw;
     .shortcuts-existing{
         height:$shortcutSize;
         width:$shortcutSize;
+        margin:1vw;
+
         position: relative;
+        border: 1px solid #191a25;
         border-radius:5px;
         transition: background-color 100ms ease-in-out;
 
@@ -77,7 +84,7 @@ $shortcutSize:8vw;
                 position: absolute;
                 top: 50%;
                 left: 50%;
-                transform: translate(-50%,-45%);
+                transform: translate(-50%,-50%);
                 opacity: 0;
                 transition: opacity 150ms ease-in-out 200ms;
             }

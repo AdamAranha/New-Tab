@@ -1,0 +1,68 @@
+@use '../variables' as *;
+// @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@00&display=swap');
+@font-face { font-family: Manrope; src: url(./assets/ttf/Manrope-Regular.ttf); }
+
+.modal-wrapper{
+
+
+    .overlay{
+        height: 100vh;
+        width: 100vw;
+        max-width: 100%;
+
+        position: absolute;
+        top: 0;
+        left: 0;
+
+        background-color: black;
+        opacity: .6;
+    }
+
+    .modal{
+        $padding:2vw;
+
+        height: 40vh;
+        width: 60vw;
+        padding:$padding;
+
+        position: absolute;
+        top: 40%;
+        left:50%;
+        transform: translate(-50%,-50%);
+        border-radius: 5px;
+
+        background-color: $primaryColour;
+        font-family: 'Manrope', sans-serif;
+
+        .title{
+            font-size: 1.5vw;
+            margin: 0;
+            padding-bottom:1vw ;
+            border-bottom: 1px solid #5d5e66
+        }
+
+        .button-group{
+
+            display: flex;
+            gap: 1vw;
+            position:absolute;
+            bottom:$padding/2;
+            right: $padding;
+
+            button{
+                all: unset;
+                border: 1px solid $font-colour;
+                border-radius: 2px;
+                // font-size: .7rem;
+                padding: .25vw .5vw;
+                cursor: pointer;
+
+                &:hover{
+                    color:$primaryColour;
+                    background-color: $font-colour;
+                }
+            }
+            
+        }
+    }
+}
