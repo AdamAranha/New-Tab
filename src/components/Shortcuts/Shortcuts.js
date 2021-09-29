@@ -32,6 +32,7 @@ export default function Shortcuts() {
                 changeModalData('show', true);
                 changeModalData('title', 'Add Shortcut');
             }} />
+
         </section>
     )
 }
