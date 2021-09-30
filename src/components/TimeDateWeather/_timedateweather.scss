@@ -4,6 +4,7 @@
 
     color:$font-colour;
     font-family: $font-family;
+    
 
     .time{
         // width: 60vw;
@@ -12,6 +13,7 @@
         font-weight: 200;   
         line-height: 90%;
         letter-spacing: .25rem;
+        text-align: center;
     }
 
     .dateWeather{

@@ -4,35 +4,67 @@ import Modal from '../Modal/Modal';
 
 export default function Shortcuts() {
 
-    // const [show, setShow] = useState(false);
+    // let localShortcutList = ;
+    const [localShortcutList, setLocalShortcutList] = useState(
+        JSON.parse(window.localStorage.getItem('newPageData')) !== null ?
+            JSON.parse(window.localStorage.getItem('newPageData')).shortcutList !== undefined ?
+                JSON.parse(window.localStorage.getItem('newPageData')).shortcutList : [] : []
+    )
     const [modalData, setModalData] = useState({
         show: false,
-        title: ''
+        title: '',
+        name: '',
+        URL: '',
+        id: ''
     })
 
-    function changeModalData(key, value) {
-        setModalData(prevState => {
-            return {
-                ...prevState,
-                [key]: value
-            }
+    function changeModalData(changeLog) {
+        changeLog.forEach(({ key, value }) => {
+            setModalData(prevState => {
+                return {
+                    ...prevState,
+                    [key]: value
+                }
+            })
         })
+    }
+
+    function trimShortcutName(name) {
+        if (name.length > 12) {
+            return name.slice(0, 10) + '...'
+        } else return name;
     }
 
     return (
         <section className='shortcuts'>
-            <Modal close={() => changeModalData('show', false)} modalData={modalData} />
-            <div className='shortcuts-existing' shortcut-letter='M'>
-                <div className='shortcuts-edit' onClick={() => {
-                    changeModalData('show', true);
-                    changeModalData('title', 'Edit Shortcut');
-                }} />
-            </div>
-            <div className='shortcuts-add' shortcut-add-img={add} onClick={() => {
-                changeModalData('show', true);
-                changeModalData('title', 'Add Shortcut');
-            }} />
+            <Modal close={() => changeModalData([{ key: 'show', value: false }])} modalData={modalData} changeModalData={changeModalData} localShortcutList={localShortcutList} setLocalShortcutList={setLocalShortcutList} />
 
+            {localShortcutList.map(shortcut => {
+                return (
+                    <div className='shortcuts-existing' shortcut-name={trimShortcutName(shortcut.name)} shortcut-letter={shortcut.name[0].toUpperCase()} onClick={() => window.location.assign(shortcut.URL)}>
+                        <div className='shortcuts-edit' onClick={(event) => {
+                            event.stopPropagation();
+                            changeModalData([
+                                { key: 'show', value: true },
+                                { key: 'title', value: 'Edit Shortcut' },
+                                { key: 'name', value: shortcut.name },
+                                { key: 'URL', value: shortcut.URL },
+                                { key: 'id', value: shortcut.id }
+                            ]);
+                        }} />
+                    </div>
+                )
+            })}
+
+            <div className='shortcuts-add' shortcut-add-img={add} onClick={() => {
+                changeModalData([
+                    { key: 'show', value: true },
+                    { key: 'title', value: 'Add Shortcut' },
+                    { key: 'name', value: '' },
+                    { key: 'URL', value: '' },
+                    { key: 'id', value: '' }]);
+            }} />
+            {/* <button className='testButton' onClick={() => console.log(modalData)}>Click Here for Modal Data</button> */}
         </section>
     )
 }

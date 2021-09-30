@@ -40,6 +40,7 @@ $shortcutSize:8vw;
     .shortcuts-existing{
         height:$shortcutSize;
         width:$shortcutSize;
+        
         margin:1vw;
 
         position: relative;
@@ -67,9 +68,19 @@ $shortcutSize:8vw;
             transform: translate(-50%,-50%);
             font-size: 5vw;
         }
+        &::after{
+            content:attr(shortcut-name);
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            font-family: $manrope;
+            padding-bottom:.4vw ;
+        }
         .shortcuts-edit{
-            height:2vw;
-            width:2vw;
+            $shortcut-edit-size:1.75vw;
+            height:$shortcut-edit-size;
+            width:$shortcut-edit-size;
             position: absolute;
             top:.25vw;
             right:.25vw;
@@ -91,5 +102,9 @@ $shortcutSize:8vw;
 
             &:hover{ background-color: #2e3042; }
         }
+    }
+
+    .testButton{
+        z-index: 11;
     }
 }

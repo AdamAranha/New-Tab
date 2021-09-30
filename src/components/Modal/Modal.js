@@ -1,21 +1,55 @@
 import React, { useState } from 'react';
 
-export default function Modal({ close, modalData }) {
+export default function Modal({ close, modalData, changeModalData, localShortcutList, setLocalShortcutList }) {
 
-    const [values, setValues] = useState({
-        name: '',
-        URL: ''
-    })
+    const [errorName, setErrorName] = useState('');
+    const [errorURL, setErrorURL] = useState('');
 
     function handleChange(event) {
         const { name, value } = event.target;
 
-        setValues(prevState => {
-            return {
-                ...prevState,
-                [name]: value
+        changeModalData([{ key: name, value }])
+    }
+
+    function resetErrorText() {
+        setErrorName('');
+        setErrorURL('');
+    }
+
+    function handleClick() {
+        let localList = localShortcutList;
+        resetErrorText();
+        if (modalData.name === '') setErrorName('*Please enter a name for your shortcut');
+        if (modalData.URL === '') setErrorURL('*Please enter a URL for your shortcut');
+        if (modalData.name !== '' && modalData.URL !== '') {
+            console.log(localList.length)
+            localList.forEach(shortcut => {
+                console.log(shortcut.id, modalData.id)
+            })
+            console.log(modalData.id)
+            const index = localList.indexOf(localList.find(shortcut => shortcut.id === modalData.id))
+            console.log(index)
+            if (index !== -1 && localList.length !== 0) {
+                console.log('match founds')
+                localList.splice(index, 1, {
+                    name: modalData.name,
+                    URL: modalData.URL,
+                    id: modalData.id
+                })
+            } else {
+                console.log('no match')
+                localList.push({
+                    name: modalData.name,
+                    URL: modalData.URL,
+                    id: `${Date.now()}`
+                })
             }
-        })
+            let temp = JSON.parse(window.localStorage.getItem('newPageData'));
+            temp.shortcutList = localList;
+            window.localStorage.setItem('newPageData', JSON.stringify(temp));
+            setLocalShortcutList([...localList]);
+            close();
+        }
     }
 
     return (
@@ -24,23 +58,27 @@ export default function Modal({ close, modalData }) {
                 <div className='overlay' />
                 <div className='modal'>
                     <h1 className='title'>{modalData.title}</h1>
-                    <p>Hey there, Neighbor</p>
+                    <p className='error-text'>
+                        {errorName}
+                        <br />
+                        {errorURL}
+                    </p>
                     <form className='form'>
                         <div className='form-name'>
-                            <label>Name</label>
-                            <input name='name' value={values.name} onChange={handleChange}></input>
+                            <label className='label-name'>Name</label>
+                            <input className='name' name='name' value={modalData.name} onChange={handleChange}></input>
                         </div>
                         <div className='form-URL'>
-                            <label>URL</label>
-                            <input name='URL' value={values.URL} onChange={handleChange}></input>
+                            <label className='label-URL'>URL</label>
+                            <input className='URL' name='URL' value={modalData.URL} onChange={handleChange}></input>
                         </div>
                     </form>
                     <div className='button-group'>
-                        <button className='cancel-button' onClick={() => close(false)}>Cancel</button>
-                        <button className='confirm-button'>Confirm</button>
+                        <button className='cancel-button' onClick={() => { close(); resetErrorText(); }}>Cancel</button>
+                        <button className='confirm-button' onClick={handleClick}>Confirm</button>
                     </div>
                 </div>
-            </div>
+            </div >
             : null
     )
 }

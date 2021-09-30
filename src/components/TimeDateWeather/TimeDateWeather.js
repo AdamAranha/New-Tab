@@ -46,10 +46,18 @@ export default function TimeDateWeather() {
             clearInterval(calendar);
             clearInterval(checkWeather);
         };
+
+
     }, [])
 
     function getTime() {
-        setTime(new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }));
+        let time = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+        // if (time[0] === '0') {
+        //     time = time.split('');
+        //     time.splice(0, 1)    //Removes 0 at the front if the hour is a single digit
+        //     time = time.join('')
+        // }
+        setTime(time);
     }
 
     function getDay() {
@@ -59,7 +67,7 @@ export default function TimeDateWeather() {
 
     function checkWeatherValue() {
         let date = new Date();
-        const storedValue = JSON.parse(window.localStorage.getItem('weatherValue'));
+        const storedValue = JSON.parse(window.localStorage.getItem('newPageData'));
         const weatherValue = {
             timestamp: date.getTime(),
             temp: null
@@ -69,10 +77,10 @@ export default function TimeDateWeather() {
             someWeather()
                 .then(result => {
                     weatherValue.temp = result;
-                    setWeather(Math.floor(result));
-                    window.localStorage.setItem('weatherValue', JSON.stringify(weatherValue));
+                    setWeather(Math.round(result));
+                    window.localStorage.setItem('newPageData', JSON.stringify({ weather: weatherValue }));
                 });
-        } else { setWeather(Math.floor(storedValue.temp)) }
+        } else { setWeather(Math.floor(storedValue.weather.temp)) }
 
         async function someWeather() {
             const response = await fetch('https://api.openweathermap.org/data/2.5/weather?q=toronto&units=metric&appid=c017c4d551f1c62d18088f7e1024cd1f');
