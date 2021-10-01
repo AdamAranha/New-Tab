@@ -1,6 +1,6 @@
 {
   "manifest_version": 2,
-  "name": "Chrome-extension",
+  "name": "New New Tab",
   "author": "Adam",
   "version": "1.0.1",
   "description": "Replaces new tab with a customized panel",
