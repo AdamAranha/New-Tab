@@ -22,34 +22,38 @@ export default function Modal({ close, modalData, changeModalData, localShortcut
         if (modalData.name === '') setErrorName('*Please enter a name for your shortcut');
         if (modalData.URL === '') setErrorURL('*Please enter a URL for your shortcut');
         if (modalData.name !== '' && modalData.URL !== '') {
-            console.log(localList.length)
-            localList.forEach(shortcut => {
-                console.log(shortcut.id, modalData.id)
-            })
-            console.log(modalData.id)
-            const index = localList.indexOf(localList.find(shortcut => shortcut.id === modalData.id))
-            console.log(index)
+            const index = localList.indexOf(localList.find(shortcut => shortcut.id === modalData.id));
             if (index !== -1 && localList.length !== 0) {
-                console.log('match founds')
                 localList.splice(index, 1, {
                     name: modalData.name,
                     URL: modalData.URL,
                     id: modalData.id
                 })
             } else {
-                console.log('no match')
                 localList.push({
                     name: modalData.name,
                     URL: modalData.URL,
                     id: `${Date.now()}`
                 })
             }
-            let temp = JSON.parse(window.localStorage.getItem('newPageData'));
-            temp.shortcutList = localList;
-            window.localStorage.setItem('newPageData', JSON.stringify(temp));
+            let localNewPageData = JSON.parse(window.localStorage.getItem('newPageData'));
+            localNewPageData.shortcutList = localList;
+            window.localStorage.setItem('newPageData', JSON.stringify(localNewPageData));
             setLocalShortcutList([...localList]);
             close();
         }
+    }
+
+    function removeShortcut() {
+        let localList = localShortcutList;
+        let localNewPageData = JSON.parse(window.localStorage.getItem('newPageData'));
+
+        const index = localList.indexOf(localList.find(({ id }) => id === modalData.id));
+        localList.splice(index, 1);
+        localNewPageData.shortcutList = localList;
+        window.localStorage.setItem('newPageData', JSON.stringify(localNewPageData));
+        setLocalShortcutList([...localList]);
+        close();
     }
 
     return (
@@ -74,8 +78,12 @@ export default function Modal({ close, modalData, changeModalData, localShortcut
                         </div>
                     </form>
                     <div className='button-group'>
-                        <button className='cancel-button' onClick={() => { close(); resetErrorText(); }}>Cancel</button>
-                        <button className='confirm-button' onClick={handleClick}>Confirm</button>
+                        <button className='remove-button' onClick={removeShortcut}>Remove</button>
+                        <div className='cancel-confirm'>
+                            <button className='cancel-button' onClick={() => { close(); resetErrorText(); }}>Cancel</button>
+                            <button className='confirm-button' onClick={handleClick}>Confirm</button>
+                        </div>
+
                     </div>
                 </div>
             </div >

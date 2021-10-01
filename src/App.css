@@ -211,8 +211,7 @@
 }
 .modal-wrapper .modal .button-group {
   display: flex;
-  gap: 1vw;
-  justify-content: flex-end;
+  justify-content: space-between;
   margin-top: 2vw;
 }
 .modal-wrapper .modal .button-group button {
@@ -222,13 +221,30 @@
   padding: 0.25vw 0.5vw;
   cursor: pointer;
 }
-.modal-wrapper .modal .button-group .cancel-button:hover {
+.modal-wrapper .modal .button-group .cancel-confirm {
+  display: flex;
+  gap: 1vw;
+}
+.modal-wrapper .modal .button-group .cancel-confirm .cancel-button {
+  justify-self: flex-end;
+}
+.modal-wrapper .modal .button-group .cancel-confirm .cancel-button:hover {
   color: #a54141;
   border-color: #a54141;
 }
-.modal-wrapper .modal .button-group .confirm-button:hover {
+.modal-wrapper .modal .button-group .cancel-confirm .confirm-button {
+  justify-self: flex-end;
+}
+.modal-wrapper .modal .button-group .cancel-confirm .confirm-button:hover {
   color: #2e8d2e;
   border-color: #2e8d2e;
+}
+.modal-wrapper .modal .button-group .remove-button {
+  justify-self: flex-start;
+}
+.modal-wrapper .modal .button-group .remove-button:hover {
+  color: #4592d1;
+  border-color: #4592d1;
 }
 
 *, *::before, *::after {

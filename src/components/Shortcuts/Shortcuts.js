@@ -4,7 +4,6 @@ import Modal from '../Modal/Modal';
 
 export default function Shortcuts() {
 
-    // let localShortcutList = ;
     const [localShortcutList, setLocalShortcutList] = useState(
         JSON.parse(window.localStorage.getItem('newPageData')) !== null ?
             JSON.parse(window.localStorage.getItem('newPageData')).shortcutList !== undefined ?
@@ -39,17 +38,17 @@ export default function Shortcuts() {
         <section className='shortcuts'>
             <Modal close={() => changeModalData([{ key: 'show', value: false }])} modalData={modalData} changeModalData={changeModalData} localShortcutList={localShortcutList} setLocalShortcutList={setLocalShortcutList} />
 
-            {localShortcutList.map(shortcut => {
+            {localShortcutList.map(({ name, URL, id }) => {
                 return (
-                    <div className='shortcuts-existing' shortcut-name={trimShortcutName(shortcut.name)} shortcut-letter={shortcut.name[0].toUpperCase()} onClick={() => window.location.assign(shortcut.URL)}>
+                    <div className='shortcuts-existing' shortcut-name={trimShortcutName(name)} shortcut-letter={name[0].toUpperCase()} onClick={() => window.location.assign(!URL.startsWith('http') ? `$https://${URL}` : URL)}>
                         <div className='shortcuts-edit' onClick={(event) => {
                             event.stopPropagation();
                             changeModalData([
                                 { key: 'show', value: true },
                                 { key: 'title', value: 'Edit Shortcut' },
-                                { key: 'name', value: shortcut.name },
-                                { key: 'URL', value: shortcut.URL },
-                                { key: 'id', value: shortcut.id }
+                                { key: 'name', value: name },
+                                { key: 'URL', value: URL },
+                                { key: 'id', value: id }
                             ]);
                         }} />
                     </div>
