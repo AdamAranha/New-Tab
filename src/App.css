@@ -236,8 +236,8 @@
   justify-self: flex-end;
 }
 .modal-wrapper .modal .button-group .cancel-confirm .confirm-button:hover {
-  color: #2e8d2e;
-  border-color: #2e8d2e;
+  color: #3ba73b;
+  border-color: #3ba73b;
 }
 .modal-wrapper .modal .button-group .remove-button {
   justify-self: flex-start;
