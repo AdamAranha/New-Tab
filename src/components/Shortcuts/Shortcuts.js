@@ -40,8 +40,11 @@ export default function Shortcuts() {
 
             {localShortcutList.map(({ name, URL, id }) => {
                 return (
-                    <div className='shortcuts-existing' shortcut-name={trimShortcutName(name)} shortcut-letter={name[0].toUpperCase()} onClick={() => window.location.assign(!URL.startsWith('http') ? `$https://${URL}` : URL)}>
+                    <a className='shortcuts-existing' href={URL} shortcut-name={trimShortcutName(name)} shortcut-letter={name[0].toUpperCase()} onClick={() => {
+
+                    }}>
                         <div className='shortcuts-edit' onClick={(event) => {
+                            event.preventDefault();
                             event.stopPropagation();
                             changeModalData([
                                 { key: 'show', value: true },
@@ -51,7 +54,7 @@ export default function Shortcuts() {
                                 { key: 'id', value: id }
                             ]);
                         }} />
-                    </div>
+                    </a>
                 )
             })}
 

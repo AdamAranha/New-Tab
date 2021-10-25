@@ -14,6 +14,10 @@ $shortcutSize:8vw;
     color:$font-colour;
     font-family: $font-family;
 
+    a {
+        color:inherit;
+    }
+
     .shortcuts-add{
         height: $shortcutSize;
         width: $shortcutSize;
@@ -47,6 +51,10 @@ $shortcutSize:8vw;
         border: 1px solid #191a25;
         border-radius:5px;
         transition: background-color 100ms ease-in-out;
+
+        .testtest{
+            border: 1px solid red;
+        }
 
         &:hover{
             background-color: #191a25;

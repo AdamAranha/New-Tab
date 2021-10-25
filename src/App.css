@@ -53,6 +53,9 @@
   color: #828699;
   font-family: "Montserrat", sans-serif;
 }
+.shortcuts a {
+  color: inherit;
+}
 .shortcuts .shortcuts-add {
   height: 8vw;
   width: 8vw;
@@ -81,6 +84,9 @@
   border: 1px solid #191a25;
   border-radius: 5px;
   transition: background-color 100ms ease-in-out;
+}
+.shortcuts .shortcuts-existing .testtest {
+  border: 1px solid red;
 }
 .shortcuts .shortcuts-existing:hover {
   background-color: #191a25;

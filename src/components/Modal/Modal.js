@@ -22,6 +22,9 @@ export default function Modal({ close, modalData, changeModalData, localShortcut
         if (modalData.name === '') setErrorName('*Please enter a name for your shortcut');
         if (modalData.URL === '') setErrorURL('*Please enter a URL for your shortcut');
         if (modalData.name !== '' && modalData.URL !== '') {
+
+            modalData.URL = !modalData.URL.startsWith('http') ? `https://${modalData.URL}` : modalData.URL
+
             const index = localList.indexOf(localList.find(shortcut => shortcut.id === modalData.id));
             if (index !== -1 && localList.length !== 0) {
                 localList.splice(index, 1, {
