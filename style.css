@@ -1,0 +1,40 @@
+body {
+    background-color: #0f111a;
+    color: darkgray;
+}
+.container {
+    position: absolute;
+    top: 25%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+}
+.time {
+    /* color: darkgray; */
+    font-family: 'Montserrat', sans-serif;
+    font-size: clamp(5em, 15vw, 22em);
+    font-weight: 100;
+    text-align: center;
+    margin: 0;
+    letter-spacing: 5px;
+    white-space: nowrap;
+}
+.date-and-weather {
+    font-family: 'Montserrat', sans-serif;
+    font-size: clamp(20px, 3.5vw, 50px);
+    font-weight: 300;
+    text-align: center;
+    white-space: nowrap;
+}
+.date-and-weather .weather {
+    letter-spacing: 3px;
+}
+.date-and-weather .weather-icon {
+    height: clamp(50px, 3.5vw, 60px);
+    position: relative;
+    top: 13px;
+    padding: 0 10px;
+}
+
+.date-and-weather .divider {
+    font-size: larger;
+}
